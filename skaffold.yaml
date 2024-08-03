@@ -14,7 +14,7 @@ build:
         dockerfile: Dockerfile
       sync:
         manual:
-          - src: "src/**/*.js" # if the file is not in this directory, skaffold will rebuild the image and update the deployment tied to it
+          - src: "src/**/*.js" # if the updated file is not in this directory, skaffold will rebuild the image and update the deployment tied to it
             dest: .
     - image: markandrew05/comments
       context: comments #directory of the project
