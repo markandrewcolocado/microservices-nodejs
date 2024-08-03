@@ -1,13 +1,13 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: posts-npsrv
-spec:
-  type: NodePort
-  selector:
+  name: posts-npsrv # this will be the name of the service
+spec: # this will customize how the service behaves
+  type: NodePort # type of service we are trying to create
+  selector: # find the pods with the label of app:posts and expose that pod to the outside world
     app: posts
-  ports:
-    - name: posts
+  ports: # expose the pod to the port indicated
+    - name: posts # for logging purposes
       protocol: TCP
-      port: 4000
-      targetPort: 4000
+      port: 4000 # the port of the service inside the k8s cluster (Node Port Service)
+      targetPort: 4000 # the port of the pod you are going to expose

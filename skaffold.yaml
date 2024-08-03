@@ -1,0 +1,58 @@
+apiVersion: skaffold/v2alpha3
+kind: Config
+deploy:
+  kubectl:
+    manifests:
+      - ./infra/k8s/* # skaffold will watch the changes to this location
+build:
+  local:
+    push: false # disable pushing image to the docker hub since this is not required when using skaffold
+  artifacts: # tells skaffold about something inside of our project that it needs to maintain (updates changes to the pod)
+    - image: markandrew05/client
+      context: client #directory of the project
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "src/**/*.js" # if the file is not in this directory, skaffold will rebuild the image and update the deployment tied to it
+            dest: .
+    - image: markandrew05/comments
+      context: comments #directory of the project
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "*.js" # if the file is not in this directory, skaffold will rebuild the image and update the deployment tied to it
+            dest: .
+    - image: markandrew05/event-bus
+      context: event-bus #directory of the project
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "*.js" # if the file is not in this directory, skaffold will rebuild the image and update the deployment tied to it
+            dest: .
+    - image: markandrew05/moderation
+      context: moderation #directory of the project
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "*.js" # if the file is not in this directory, skaffold will rebuild the image and update the deployment tied to it
+            dest: .
+    - image: markandrew05/posts
+      context: posts #directory of the project
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "*.js" # if the file is not in this directory, skaffold will rebuild the image and update the deployment tied to it
+            dest: .
+    - image: markandrew05/query
+      context: query #directory of the project
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "*.js" # if the file is not in this directory, skaffold will rebuild the image and update the deployment tied to it
+            dest: .

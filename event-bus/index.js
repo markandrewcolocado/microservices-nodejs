@@ -9,6 +9,7 @@ app.use(bodyParser.json());
 const events = [];
 
 app.post("/events", (req, res) => {
+  console.log(`Received event ${req.body.type}`);
   const event = req.body;
 
   events.push(event);

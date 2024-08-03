@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: query
-          image: markandrew05/blog-query
+          image: markandrew05/query
 ---
 apiVersion: v1
 kind: Service
